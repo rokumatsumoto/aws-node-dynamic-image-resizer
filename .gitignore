@@ -1,1 +1,3 @@
 /secrets/secrets.env
+.serverless/*
+/node_modules

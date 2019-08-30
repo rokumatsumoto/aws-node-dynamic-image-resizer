@@ -7,8 +7,9 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs8.10
-  profile: dev-fii
+  runtime: nodejs10.x
+  region: eu-central-1
+  profile: default
 
   usagePlan:
     quota:
@@ -20,9 +21,9 @@ provider:
       rateLimit: 50
 
 custom:
-  serviceName: image-resizing
+  serviceName: image-resizing2
   stage: ${opt:stage, self:custom.defaultStage}
-  bucket: dynamic-image-resizing
+  bucket: dynamic-image-resizing4
   webpack:
     includeModules:
       forceExclude:
@@ -39,23 +40,23 @@ functions:
     handler: src/handlers/resizer/index.handler
     events:
       - http:
-          path: /{size}/{image}
+          path: /{image}
           method: get
     environment:
       # Provide your bucket name here
-      BUCKET: dynamic-image-resizing
-      REGION: us-east-1
+      BUCKET: dynamic-image-resizing4
+      REGION: eu-central-1
     # layers:
     #   - {Ref: ImageLibsLambdaLayer}
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "s3:GetObject"
-        Resource: "arn:aws:s3:::dynamic-image-resizing/*"
+        Resource: "arn:aws:s3:::dynamic-image-resizing4/*"
       - Effect: "Allow"
         Action:
           - "s3:PutObject"
-        Resource: "arn:aws:s3:::dynamic-image-resizing/*"
+        Resource: "arn:aws:s3:::dynamic-image-resizing4/*"
 
 package:
   exclude:
@@ -68,4 +69,4 @@ package:
 #   imageLibs:
 #     path: layer
 #     compatibleRuntimes:
-#       - nodejs8.10
+#       - nodejs10.x
