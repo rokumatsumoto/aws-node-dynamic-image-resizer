@@ -1,6 +1,7 @@
 import * as AWS from 'aws-sdk'
 import stream from 'stream'
 
+const mime = require('mime/lite')
 const S3 = new AWS.S3()
 
 class S3Handler {
@@ -15,7 +16,7 @@ class S3Handler {
     return {
       writeStream: passThrough,
       uploaded: S3.upload({
-        ContentType: 'image/jpeg',
+        ContentType: mime.getType(Key),
         Body: passThrough,
         Bucket,
         Key

@@ -9,3 +9,7 @@ const LARGE = {
 }
 
 export const SIZES = [THUMB, LARGE];
+
+export const ACCEPT_LIST = ['jpg', 'jpeg', 'gif', 'png','JPG', 'JPEG', 'GIF', 'PNG']
+
+export const URL = `http://${process.env.BUCKET}.s3-website.${process.env.REGION}.amazonaws.com`

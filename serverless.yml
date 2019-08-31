@@ -34,6 +34,8 @@ custom:
     - dev
     - integration
     - production
+  serverless-offline:
+    port: 4000
 
 functions:
   resize:
