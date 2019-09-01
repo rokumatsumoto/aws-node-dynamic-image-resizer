@@ -2,7 +2,7 @@
   "name": "aws-node-dynamic-image-resizer",
   "version": "1.0.0",
   "license": "MIT",
-  "author": "Sebastian Borza",
+  "author": "Samet Gunaydin",
   "scripts": {
     "eslint": "eslint ./src",
     "deploy": "SLS_DEBUG=* sls deploy --stage $STAGE --region $REGION --verbose",

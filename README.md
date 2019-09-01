@@ -5,9 +5,9 @@ layout: Doc
 framework: v1
 platform: AWS
 language: nodeJS
-authorLink: 'https://github.com/sebito91'
-authorName: 'Sebastian Borza'
-authorAvatar: 'https://avatars0.githubusercontent.com/u/3159454?v=4&s=140'
+authorLink: 'https://github.com/rokumatsumoto'
+authorName: 'Samet Gunaydin'
+authorAvatar: 'https://avatars3.githubusercontent.com/u/28678254?s=460&v=4'
 -->
 
 # Dynamic image resizing with Node.js and Serverless framework
