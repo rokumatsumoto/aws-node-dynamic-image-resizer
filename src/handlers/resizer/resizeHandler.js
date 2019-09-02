@@ -11,14 +11,10 @@ class ResizeHandler {
 
   async _process(event) {
     let { image } = event.pathParameters
-    console.log(image)
     image = this.decodePath(image)
-    console.log(image)
     imageSize = this.imageSize(image);
 
     const path = this.validatePath(image)
-    console.log(path.valid)
-    console.log(path.data)
     if (path.valid) {
       return await this.resize(image)
     }
@@ -28,11 +24,7 @@ class ResizeHandler {
 
   async resize(path) {
     try {
-      console.log(path);
-
       const originalFilename = this.originalFilename(path, imageSize.text);
-
-      console.log('originalFilename: ' + originalFilename)
 
       const sizeArray = imageSize.size.split('x')
       const width = parseInt(sizeArray[0])
@@ -41,11 +33,13 @@ class ResizeHandler {
       const Key = originalFilename
       const newKey = path
 
-      console.log('newKey: ' + newKey);
-
       const Bucket = process.env.BUCKET
       const streamResize = sharp()
         .resize(width, height)
+
+        // .resize(width, height, {
+        //   fit: sharp.fit.fill
+        // })
 
       const readStream = s3Handler.readStream({ Bucket, Key })
       const { writeStream, uploaded } = s3Handler.writeStream({ Bucket, Key: newKey })
@@ -92,7 +86,6 @@ class ResizeHandler {
 
   imageSize(path) {
     return SIZES.find((size) => {
-      console.log(`${size.text}.${this.getFileExtension(path)}`)
       return path.includes(`${size.text}.${this.getFileExtension(path)}`);
     });
   }
