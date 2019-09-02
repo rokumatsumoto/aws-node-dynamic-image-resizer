@@ -8,7 +8,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  region: eu-central-1
+  region: ${self:custom.region}
   profile: default
 
   usagePlan:
@@ -21,9 +21,10 @@ provider:
       rateLimit: 50
 
 custom:
-  serviceName: image-resizing2
+  serviceName: image-resizing
   stage: ${opt:stage, self:custom.defaultStage}
-  bucket: dynamic-image-resizing4
+  bucket: boyutluseyler-staging
+  region: eu-central-1
   webpack:
     includeModules:
       forceExclude:
@@ -42,23 +43,23 @@ functions:
     handler: src/handlers/resizer/index.handler
     events:
       - http:
-          path: /{image}
+          path: /{image+}
           method: get
     environment:
       # Provide your bucket name here
-      BUCKET: dynamic-image-resizing4
-      REGION: eu-central-1
+      BUCKET: ${self:custom.bucket}
+      REGION: ${self:custom.region}
     # layers:
     #   - {Ref: ImageLibsLambdaLayer}
     iamRoleStatements:
       - Effect: "Allow"
         Action:
           - "s3:GetObject"
-        Resource: "arn:aws:s3:::dynamic-image-resizing4/*"
+        Resource: "arn:aws:s3:::${self:custom.bucket}/*"
       - Effect: "Allow"
         Action:
           - "s3:PutObject"
-        Resource: "arn:aws:s3:::dynamic-image-resizing4/*"
+        Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 package:
   exclude:
