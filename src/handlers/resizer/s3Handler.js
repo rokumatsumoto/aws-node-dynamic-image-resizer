@@ -7,6 +7,10 @@ const S3 = new AWS.S3()
 class S3Handler {
   constructor() { }
 
+  headObject({ Bucket, Key }) {
+    return S3.headObject({ Bucket, Key }).promise();
+  }
+
   readStream({ Bucket, Key }) {
     return S3.getObject({ Bucket, Key }).createReadStream()
   }

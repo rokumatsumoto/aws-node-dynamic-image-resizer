@@ -40,10 +40,9 @@ class ResizeHandler {
         // .resize(width, height, {
         //   fit: sharp.fit.fill
         // })
-
+      await s3Handler.headObject({ Bucket, Key })
       const readStream = s3Handler.readStream({ Bucket, Key })
       const { writeStream, uploaded } = s3Handler.writeStream({ Bucket, Key: newKey })
-
       //data streaming
       readStream
         .pipe(streamResize)
@@ -56,9 +55,14 @@ class ResizeHandler {
         body: ''
       }
     } catch (error) {
+      if (error.statusCode === 404) return this.response404()
       console.log(error)
       throw new Error(error)
     }
+  }
+
+  response404() {
+    return this.generateResponse(false, 404, "The resource requested could not be found on this server.").data
   }
 
   validatePath(image) {
