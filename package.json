@@ -13,9 +13,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
-    "lodash": "^4.17.15",
     "mime": "^2.4.4",
-    "serverless-offline": "^5.10.1",
+    "serverless-offline": "^5.12.1",
     "serverless-webpack": "^5.3.1",
     "sharp": "^0.23.0",
     "source-map-support": "^0.5.13",
@@ -32,12 +31,8 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-source-map-support": "^2.1.1",
     "jest": "^24.9.0",
-    "serverless": "^1.51.0",
-    "webpack": "^4.39.3",
+    "serverless": "^1.59.3",
+    "webpack": "^4.41.2",
     "webpack-node-externals": "^1.7.2"
-  },
-  "resolutions": {
-    "**/set-value": "^2.0.1",
-    "**/lodash": "^4.17.15"
   }
 }
