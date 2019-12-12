@@ -11,15 +11,6 @@ provider:
   region: ${self:custom.region}
   profile: default
 
-  usagePlan:
-    quota:
-      limit: 100
-      offset: 2
-      period: MONTH
-    throttle:
-      burstLimit: 100
-      rateLimit: 50
-
 custom:
   serviceName: image-resizing
   stage: ${opt:stage, self:custom.defaultStage}
