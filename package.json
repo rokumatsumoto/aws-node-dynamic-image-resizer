@@ -32,6 +32,7 @@
     "babel-plugin-source-map-support": "^2.1.1",
     "jest": "^24.9.0",
     "serverless": "^1.59.3",
+    "serverless-dotenv-plugin": "^2.1.1",
     "webpack": "^4.41.2",
     "webpack-node-externals": "^1.7.2"
   }

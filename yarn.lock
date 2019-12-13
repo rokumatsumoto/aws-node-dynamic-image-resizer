@@ -2394,7 +2394,7 @@ cbor@4.1.4:
     json-text-sequence "^0.1"
     nofilter "^1.0.1"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.4.1, chalk@^2.4.2:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==
@@ -3108,6 +3108,16 @@ dot-prop@^4.1.0:
   integrity sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==
   dependencies:
     is-obj "^1.0.0"
+
+dotenv-expand@^4.0.1:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv-expand/-/dotenv-expand-4.2.0.tgz#def1f1ca5d6059d24a766e587942c21106ce1275"
+  integrity sha1-3vHxyl1gWdJKdm5YeULCEQbOEnU=
+
+dotenv@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+  integrity sha1-hk7xN5rO1Vzm+V3r7NzhefegzR0=
 
 dotenv@^8.0.0:
   version "8.2.0"
@@ -7188,6 +7198,15 @@ serialize-javascript@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
   integrity sha512-rs9OggEUF0V4jUSecXazOYsLfu7OGK2qIn3c7IPBiffz32XniEp/TX9Xmc9LQfK2nQ2QKHvZ2oygKUGU0lG4jQ==
+
+serverless-dotenv-plugin@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/serverless-dotenv-plugin/-/serverless-dotenv-plugin-2.1.1.tgz#73f4638f71811a065ee51e2b363f2157327afabc"
+  integrity sha512-T08fI0XoWGMKfs1KEpYrFwG/6A+qR2UZyANgchV7jJAhRhCtO0my1oMTLovyone5UHXOwTojrwUw3pm8NYa3rg==
+  dependencies:
+    chalk "^2.1.0"
+    dotenv "^4.0.0"
+    dotenv-expand "^4.0.1"
 
 serverless-offline@^5.12.1:
   version "5.12.1"
