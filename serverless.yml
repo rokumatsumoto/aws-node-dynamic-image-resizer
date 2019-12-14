@@ -1,21 +1,36 @@
 service:
-  name: ${self:custom.serviceName}
+  name: ${self:custom.service_name}
 
 plugins:
   - serverless-offline
   - serverless-webpack
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
   runtime: nodejs10.x
   region: ${self:custom.region}
   profile: default
+  environment:
+    DESTINATION_BUCKET: ${self:custom.destination_bucket}
+    REGION: ${self:custom.region}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+      Resource: "arn:aws:s3:::${self:custom.source_bucket}/*"
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.destination_bucket}/*"
 
 custom:
-  serviceName: image-resizing
+  service_name: serverless-image-resizing
   stage: ${opt:stage, self:custom.defaultStage}
-  bucket: boyutluseyler-staging
-  region: eu-central-1
+  source_bucket: ${env:SOURCE_BUCKET}
+  destination_bucket: ${env:DESTINATION_BUCKET}
+  region: ${env:REGION}
   webpack:
     includeModules:
       forceExclude:
@@ -33,24 +48,34 @@ functions:
   resize:
     handler: src/handlers/resizer/index.handler
     events:
-      - http:
-          path: /{image+}
-          method: get
-    environment:
-      # Provide your bucket name here
-      BUCKET: ${self:custom.bucket}
-      REGION: ${self:custom.region}
-    # layers:
-    #   - {Ref: ImageLibsLambdaLayer}
-    iamRoleStatements:
-      - Effect: "Allow"
-        Action:
-          - "s3:GetObject"
-        Resource: "arn:aws:s3:::${self:custom.bucket}/*"
-      - Effect: "Allow"
-        Action:
-          - "s3:PutObject"
-        Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+      - s3:
+          bucket: ${self:custom.source_bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaders/
+            - suffix: .png
+          existing: true
+      - s3:
+          bucket: ${self:custom.source_bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaders/
+            - suffix: .jpg
+          existing: true
+      - s3:
+          bucket: ${self:custom.source_bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaders/
+            - suffix: .jpeg
+          existing: true
+      - s3:
+          bucket: ${self:custom.source_bucket}
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploaders/
+            - suffix: .gif
+          existing: true
 
 package:
   exclude:
@@ -58,9 +83,3 @@ package:
     - node_modules/**
     - '!node_modules/babel-runtime/**'
     - '!node_modules/sharp/**'
-
-# layers:
-#   imageLibs:
-#     path: layer
-#     compatibleRuntimes:
-#       - nodejs10.x

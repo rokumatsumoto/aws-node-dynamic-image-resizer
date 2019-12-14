@@ -1,18 +1,20 @@
 import { s3Handler } from './s3Handler'
 import { SIZES, ACCEPT_LIST, URL } from './constants'
+import { getSourceBucket, getDestinationBucket } from '../../env'
 
 //Core image processing package
 const sharp = require('sharp')
 
-let imageSize
-
 class ResizeHandler {
-  constructor(){ }
+  constructor() { }
 
   async _process(event) {
-    let { image } = event.pathParameters
-    image = this.decodePath(image)
-    imageSize = this.imageSize(image);
+
+    const { eventName, bucket, key } = s3Handler.getFileInformation(event)
+
+    console.log(`Received ${eventName} for item in bucket: ${bucket}, key: ${key}`)
+
+    let image = key
 
     const path = this.validatePath(image)
     if (path.valid) {
@@ -24,36 +26,38 @@ class ResizeHandler {
 
   async resize(path) {
     try {
-      const originalFilename = this.originalFilename(path, imageSize.text);
+      const Key = path
+      const sourceBucket = getSourceBucket()
+      const destinationBucket = getDestinationBucket()
+      let newKeys = []
 
-      const sizeArray = imageSize.size.split('x')
-      const width = parseInt(sizeArray[0])
-      const height = parseInt(sizeArray[1])
+      await Promise.all(SIZES.map(async (SIZE) => {
+        let dimensionArray = SIZE.dimension.split('x')
+        let width = parseInt(dimensionArray[0])
+        let height = parseInt(dimensionArray[1])
 
-      const Key = originalFilename
-      const newKey = path
+        let newKey = this.filenameWithSize(path, SIZE.text)
+        console.log(newKey)
 
-      const Bucket = process.env.BUCKET
-      const streamResize = sharp()
-        .resize(width, height)
-
+        let streamResize = sharp().resize(width, height)
         // .resize(width, height, {
         //   fit: sharp.fit.fill
         // })
-      await s3Handler.headObject({ Bucket, Key })
-      const readStream = s3Handler.readStream({ Bucket, Key })
-      const { writeStream, uploaded } = s3Handler.writeStream({ Bucket, Key: newKey })
-      //data streaming
-      readStream
-        .pipe(streamResize)
-        .pipe(writeStream)
 
-      await uploaded
-      return {
-        headers: { 'location': `${URL}/${this.encodePath(newKey)}` },
-        statusCode: 301,
-        body: ''
-      }
+        const readStream = s3Handler.readStream({ Bucket: sourceBucket, Key })
+        const { writeStream, uploaded } = s3Handler.writeStream({ Bucket: destinationBucket, Key: newKey })
+
+        //data streaming
+        readStream
+          .pipe(streamResize)
+          .pipe(writeStream)
+
+        await uploaded
+
+        newKeys.push(newKey)
+      }));
+
+      return this.generateResponse(true, 200, newKeys)
     } catch (error) {
       if (error.statusCode === 404) return this.response404()
       console.log(error)
@@ -69,17 +73,14 @@ class ResizeHandler {
     if (!this.isImage(image)) {
       return this.generateResponse(false, 400, "Bad request - Could not determine the image type.")
     }
-    if (imageSize === undefined) {
-      return this.generateResponse(false, 400, "Bad request - Could not determine the image size.")
-    }
     return {
       valid: true
     }
   }
 
   isImage(path) {
-    const fileExtension =  this.getFileExtension(path);
-    const fileTypeChecker = value => [fileExtension].some(element =>    element.includes(value));
+    const fileExtension = this.getFileExtension(path);
+    const fileTypeChecker = value => [fileExtension].some(element => element.includes(value));
     const fileType = ACCEPT_LIST.filter(fileTypeChecker);
 
     if (fileType.length === 0) {
@@ -115,6 +116,11 @@ class ResizeHandler {
   originalFilename(path, sizeText) {
     const extension = this.getFileExtension(path)
     return this.filename(path).slice(0, -parseInt(sizeText.length)) + '.' + extension
+  }
+
+  filenameWithSize(path, size) {
+    const extension = this.getFileExtension(path)
+    return `${this.filename(path)}_${size}.${extension}`
   }
 
   filename(path) {
