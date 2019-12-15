@@ -45,8 +45,8 @@ custom:
     port: 4000
 
 functions:
-  resize:
-    handler: src/handlers/resizer/index.handler
+  resize_default:
+    handler: src/default/handler.main
     events:
       - s3:
           bucket: ${self:custom.source_bucket}

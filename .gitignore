@@ -1,6 +1,5 @@
 /secrets/secrets.env
 .serverless/*
 /node_modules
-/.vscode/aws-node-dynamic-image-resizer.code-workspace
 .webpack/*
 .env

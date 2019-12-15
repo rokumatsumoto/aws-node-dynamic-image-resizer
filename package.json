@@ -1,6 +1,7 @@
 {
   "name": "aws-node-dynamic-image-resizer",
   "version": "2.0.0",
+  "description": "Run image resizing serverless!",
   "license": "MIT",
   "author": "Samet Gunaydin",
   "scripts": {
@@ -14,7 +15,6 @@
   "dependencies": {
     "@babel/runtime": "^7.5.5",
     "mime": "^2.4.4",
-    "serverless-offline": "^5.12.1",
     "serverless-webpack": "^5.3.1",
     "sharp": "^0.23.0",
     "source-map-support": "^0.5.13",
@@ -33,6 +33,7 @@
     "jest": "^24.9.0",
     "serverless": "^1.59.3",
     "serverless-dotenv-plugin": "^2.1.1",
+    "serverless-offline": "^5.12.1",
     "webpack": "^4.41.2",
     "webpack-node-externals": "^1.7.2"
   }
