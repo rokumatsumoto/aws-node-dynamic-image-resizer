@@ -26,7 +26,7 @@
 
 - The `resize` function is called whenever an image with `.png`, `.jpg`, `.jpeg` or `gif` extension is uploaded to folder `uploaders/` in the `source_bucket`
 - The `resize` function runs image resizing process `asynchronously` for the `thumb`, `medium` and `large` sizes
-- Processed objects save into `destination_bucket`
+- Save processed objects into `destination_bucket`
 - Use `serverless-dotenv-plugin` to reference `environment variables` as `${env:VAR_NAME}` inside `serverless.yml` and load them into `lambda` functions
 - Add `s3:PutObjectAcl` permission for specifying `ACL` to the processed objects
 - Add `env.js` file for accessing `environment variables`
