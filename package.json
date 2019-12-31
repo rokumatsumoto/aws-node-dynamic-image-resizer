@@ -1,6 +1,6 @@
 {
   "name": "aws-node-dynamic-image-resizer",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Run image resizing serverless!",
   "license": "MIT",
   "author": "Samet Gunaydin",
