@@ -5,6 +5,21 @@
 
 # CHANGELOG
 
+## 2.1.0
+
+### Features
+
+- Add `resize_avatar` function to serverless
+
+### Fixes
+
+- Add uppercase versions of `.png`, `.jpg`, `.jpeg`, `.gif` suffixes to serverless s3 events
+
+### Chore & Maintenance
+
+- Update serverless s3 event prefix of `resize_default` function
+
+
 ## 2.0.1
 
 ### Chore & Maintenance
