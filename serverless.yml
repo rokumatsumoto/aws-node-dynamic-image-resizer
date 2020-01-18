@@ -52,56 +52,56 @@ functions:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .png
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .PNG
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .jpg
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .JPG
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .jpeg
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .JPEG
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .gif
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/design/illustration-file/
+            - prefix: ${env:RESIZE_DEFAULT_BUCKET_PREFIX}
             - suffix: .GIF
           existing: true
   resize_avatar:
@@ -111,56 +111,56 @@ functions:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .png
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .PNG
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .jpg
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .JPG
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .jpeg
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .JPEG
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .gif
           existing: true
       - s3:
           bucket: ${self:custom.source_bucket}
           event: s3:ObjectCreated:*
           rules:
-            - prefix: uploads/user/avatar-file/
+            - prefix: ${env:RESIZE_AVATAR_BUCKET_PREFIX}
             - suffix: .GIF
           existing: true
 
