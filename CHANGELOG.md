@@ -5,6 +5,13 @@
 
 # CHANGELOG
 
+## 2.1.1
+
+### Chore & Maintenance
+
+- Update `README.md`
+- Add documentation for environment variables/secrets
+
 ## 2.1.0
 
 ### Features
