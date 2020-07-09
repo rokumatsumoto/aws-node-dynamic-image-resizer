@@ -29,7 +29,7 @@ In order to deploy the function, you will need the following:
    yarn install
    ```
 
-3. Add your AWS credentials into the `secrets/secrets.env` file
+3. Add your AWS credentials into the `secrets/secrets.env` file. (See [this](doc/development/environment_variables.md) for documentation)
 4. Add your env variables into the `.env` file
 5. Deploy the Serverless project
 
