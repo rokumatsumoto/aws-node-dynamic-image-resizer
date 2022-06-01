@@ -16,7 +16,7 @@
     "@babel/runtime": "^7.5.5",
     "mime": "^2.4.4",
     "serverless-webpack": "^5.3.1",
-    "sharp": "^0.23.0",
+    "sharp": "^0.30.5",
     "source-map-support": "^0.5.13",
     "stream": "^0.0.2"
   },
